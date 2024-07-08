@@ -75,31 +75,29 @@ def crop_faces(input_folder, output_folder):
 
 Foi utilizado a biblioteca face_recognition do Python, e criado uma função que utilizar que recebe a foto do documento e a do usuário, e realiza o checagem.
 
-`
-def  document_check(foto_documento, foto_usuario):
-    import cv2
-    import face_recognition as fr
-    imgDocumento = fr.load_image_file(foto_documento)
-    imgDocumento = cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB)
-    imgTest = fr.load_image_file(foto_usuario)
-    imgTest = cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB)
-    imgDocumento_encode = fr.face_encodings(imgDocumento)[0]
-    imgTest_encode = fr.face_encodings(imgTest)[0]
-    comparacao = fr.compare_faces([imgDocumento_encode],imgTest_encode)
-
-    if comparacao[0] == True:
-        print("\nVerificação bem-sucedida | Documento confere com o usuário\n")
-        plt.imshow(cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB))
-        plt.show()
-        plt.imshow(cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB))
-        plt.show()
-    else:
-        print("\nVerificação mal-sucedida | Documento não confere com o usuário\n")
-        plt.imshow(cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB))
-        plt.show()
-        plt.imshow(cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB))
-        plt.show()
-        `
+`def  document_check(foto_documento, foto_usuario):
+        import cv2
+        import face_recognition as fr
+        imgDocumento = fr.load_image_file(foto_documento)
+        imgDocumento = cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB)
+        imgTest = fr.load_image_file(foto_usuario)
+        imgTest = cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB)
+        imgDocumento_encode = fr.face_encodings(imgDocumento)[0]
+        imgTest_encode = fr.face_encodings(imgTest)[0]
+        comparacao = fr.compare_faces([imgDocumento_encode],imgTest_encode)
+        if comparacao[0] == True:
+            print("\nVerificação bem-sucedida | Documento confere com o usuário\n")
+            plt.imshow(cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB))
+            plt.show()
+            plt.imshow(cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB))
+            plt.show()
+        else:
+            print("\nVerificação mal-sucedida | Documento não confere com o usuário\n")
+            plt.imshow(cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB))
+            plt.show()
+            plt.imshow(cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB))
+            plt.show()
+            `
 
 <img width="422" alt="image" src="https://github.com/luizhdramos/Fiap_Computer_Vision/assets/96795757/0247bd36-6f70-4963-89ec-1fcd333b34d0">
 
@@ -108,42 +106,40 @@ def  document_check(foto_documento, foto_usuario):
 Foi realizado o treinamento de um modelo utilizando como base os pesos do modelo pre-treinado MobileNetV2, utilizando como input o `ImageDataGenerator` onde foi utilizado data augmentation nas amostras de treinamento. Com o modelo treinado ele foi consumido na função abaixo:
 
 `
+  def check_liviness(folder_path, filename):
+         # Utiliza-se modelo pre-treinado de detecção de faces (Haar Cascade)
+        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        image = cv2.imread(folder_path + filename)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image_RGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3, minSize=(30, 30))
 
-def check_liviness(folder_path, filename):
-     # Utiliza-se modelo pre-treinado de detecção de faces (Haar Cascade)
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-    image = cv2.imread(folder_path + filename)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image_RGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3, minSize=(30, 30))
-
-    for (x, y, w, h) in faces:
-        cropped_face = image[y:y+h, x:x+w]
-
-
-    cv2.imwrite(folder_path + 'face_' + filename , cropped_face)
-
-    img = load_img(folder_path + 'face_' + filename, target_size=(224, 224))
-    x = img_to_array(img)
-    x /= 255
-    x = np.expand_dims(x, axis=0)
-
-    images = np.vstack([x])
-    classes = model.predict(images, batch_size=32)
-    print(classes[0])
-
-    if classes[0]>0.5:
-        print("\nA foto é real\n")
-        plt.imshow(image_RGB)
-        plt.show()
-        plt.imshow(img)
-        plt.show()
-    else:
-        print('\nA foto é fake\n')
-        plt.imshow(image_RGB)
-        plt.show()
-        plt.imshow(img)
-        plt.show()
+        for (x, y, w, h) in faces:
+            cropped_face = image[y:y+h, x:x+w]
+    
+        cv2.imwrite(folder_path + 'face_' + filename , cropped_face)
+    
+        img = load_img(folder_path + 'face_' + filename, target_size=(224, 224))
+        x = img_to_array(img)
+        x /= 255
+        x = np.expand_dims(x, axis=0)
+    
+        images = np.vstack([x])
+        classes = model.predict(images, batch_size=32)
+        print(classes[0])
+    
+        if classes[0]>0.5:
+            print("\nA foto é real\n")
+            plt.imshow(image_RGB)
+            plt.show()
+            plt.imshow(img)
+            plt.show()
+        else:
+            print('\nA foto é fake\n')
+            plt.imshow(image_RGB)
+            plt.show()
+            plt.imshow(img)
+            plt.show()
 
 `
 
