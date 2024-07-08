@@ -23,8 +23,8 @@ Foi realizado uma redução de amostras fakes, do dataset [LCC FASD]https://www.
 Em seguida foi utilizado a função `crop_faces` (`haarcascade`) para recortar apenas os rostos das pessoas da foto:
 
 
-`
-def crop_faces(input_folder, output_folder):
+    `
+    def crop_faces(input_folder, output_folder):
 
     # Utiliza-se modelo pre-treinado de detecção de faces (Haar Cascade)
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -67,7 +67,7 @@ def crop_faces(input_folder, output_folder):
             # A face recortada é salva no caminho selecionado
             cv2.imwrite(output_image_path, cropped_face)
             print(f"Face salva em: {output_image_path}")
-`
+            `
 
 ## Elaboração da solução
 
@@ -75,7 +75,8 @@ def crop_faces(input_folder, output_folder):
 
 Foi utilizado a biblioteca face_recognition do Python, e criado uma função que utilizar que recebe a foto do documento e a do usuário, e realiza o checagem.
 
-`def  document_check(foto_documento, foto_usuario):
+`
+def  document_check(foto_documento, foto_usuario):
         import cv2
         import face_recognition as fr
         imgDocumento = fr.load_image_file(foto_documento)
@@ -105,8 +106,9 @@ Foi utilizado a biblioteca face_recognition do Python, e criado uma função que
 
 Foi realizado o treinamento de um modelo utilizando como base os pesos do modelo pre-treinado MobileNetV2, utilizando como input o `ImageDataGenerator` onde foi utilizado data augmentation nas amostras de treinamento. Com o modelo treinado ele foi consumido na função abaixo:
 
-`
-  def check_liviness(folder_path, filename):
+
+  
+    def check_liviness(folder_path, filename):
          # Utiliza-se modelo pre-treinado de detecção de faces (Haar Cascade)
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         image = cv2.imread(folder_path + filename)
