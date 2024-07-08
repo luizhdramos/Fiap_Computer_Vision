@@ -8,9 +8,9 @@ Este repositório contém o código e os recursos para projetos de visão comput
 
 Bases de Dados Utilizadas
 
-[LCC FASD] https://www.kaggle.com/datasets/faber24/lcc-fasd
-[Real vs Fake Anti-Spoofing Video Classification] https://www.kaggle.com/datasets/trainingdatapro/real-vs-fake-anti-spoofing-video-classification
-[Anti-Spoofing] https://www.kaggle.com/datasets/tapakah68/anti-spoofing
+[LCC FASD] (https://www.kaggle.com/datasets/faber24/lcc-fasd)
+[Real vs Fake Anti-Spoofing Video Classification] (https://www.kaggle.com/datasets/trainingdatapro/real-vs-fake-anti-spoofing-video-classification)
+[Anti-Spoofing] (https://www.kaggle.com/datasets/tapakah68/anti-spoofing)
 
 ## Método de Geração de Dados
 
@@ -145,18 +145,16 @@ def check_liviness(folder_path, filename):
         plt.imshow(img)
         plt.show()
 
-
-
 `
 
 <img width="405" alt="image" src="https://github.com/luizhdramos/Fiap_Computer_Vision/assets/96795757/43f95d05-d9db-40ba-9162-5e03197e9820">
 
 ## Nova versão e Melhoria no projeto
 
-    - Deixaria uma estação de trabalho com o ambiente virtual com as bibliotecas necessárias para o funcionamento basico do projeto
-    - Realizar um "Face Scrapping" em sites de video como o Youtube para aumentar a quantidade de amostras de fotos reais.
-    - Melhorar o processo de input de imagem, para ser obtido diretamente com uma webcam.
-    - Dentro dessa obtenção de imagem pela webcam, utilizaria o OpenCV para marcar o local onde o rosto do usuário deve ser posicionado, para geração de dados de maior qualidade
+- Deixaria uma estação de trabalho com o ambiente virtual com as bibliotecas necessárias para o funcionamento basico do projeto
+- Realizar um "Face Scrapping" em sites de video como o Youtube para aumentar a quantidade de amostras de fotos reais.
+- Melhorar o processo de input de imagem, para ser obtido diretamente com uma webcam.
+- Dentro dessa obtenção de imagem pela webcam, utilizaria o OpenCV para marcar o local onde o rosto do usuário deve ser posicionado, para geração de dados de maior qualidade
 
 
 
