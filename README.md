@@ -14,7 +14,7 @@ Este repositório contém o código e os recursos para projetos de visão comput
 
 ## Método de Geração de Dados
 
-Foi realizado uma redução de amostras fakes, do dataset [LCC FASD]https://www.kaggle.com/datasets/faber24/lcc-fasd, e utilizado os vídeos reais dos datasets [Real vs Fake Anti-Spoofing Video Classification]https://www.kaggle.com/datasets/trainingdatapro/real-vs-fake-anti-spoofing-video-classification e [Anti-Spoofing]https://www.kaggle.com/datasets/tapakah68/anti-spoofing para a geração de novos frames, utilizando o `ffmpeg`e o script abaixo:
+Foi realizado uma redução de amostras fakes, do dataset [LCC FASD](https://www.kaggle.com/datasets/faber24/lcc-fasd), e utilizado os vídeos reais dos datasets [Real vs Fake Anti-Spoofing Video Classification](https://www.kaggle.com/datasets/trainingdatapro/real-vs-fake-anti-spoofing-video-classification) e [Anti-Spoofing](https://www.kaggle.com/datasets/tapakah68/anti-spoofing) para a geração de novos frames, utilizando o `ffmpeg`e o script abaixo:
 
 `
 !ffmpeg -i caminho_do_video/{i}.mp4 -vf "select=gt(scene\,0.01)"  -vsync vfr caminho_do_saida_imagem/person_{i}_%04d.png
