@@ -23,7 +23,7 @@ Foi realizado uma redução de amostras fakes, do dataset [LCC FASD]https://www.
 Em seguida foi utilizado a função `crop_faces` (`haarcascade`) para recortar apenas os rostos das pessoas da foto:
 
 
-    `
+    
     def crop_faces(input_folder, output_folder):
 
     # Utiliza-se modelo pre-treinado de detecção de faces (Haar Cascade)
@@ -67,7 +67,7 @@ Em seguida foi utilizado a função `crop_faces` (`haarcascade`) para recortar a
             # A face recortada é salva no caminho selecionado
             cv2.imwrite(output_image_path, cropped_face)
             print(f"Face salva em: {output_image_path}")
-            `
+            
 
 ## Elaboração da solução
 
