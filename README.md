@@ -75,8 +75,8 @@ Em seguida foi utilizado a função `crop_faces` (`haarcascade`) para recortar a
 
 Foi utilizado a biblioteca face_recognition do Python, e criado uma função que utilizar que recebe a foto do documento e a do usuário, e realiza o checagem.
 
-`
-def  document_check(foto_documento, foto_usuario):
+
+    def  document_check(foto_documento, foto_usuario):
         import cv2
         import face_recognition as fr
         imgDocumento = fr.load_image_file(foto_documento)
@@ -86,6 +86,7 @@ def  document_check(foto_documento, foto_usuario):
         imgDocumento_encode = fr.face_encodings(imgDocumento)[0]
         imgTest_encode = fr.face_encodings(imgTest)[0]
         comparacao = fr.compare_faces([imgDocumento_encode],imgTest_encode)
+        
         if comparacao[0] == True:
             print("\nVerificação bem-sucedida | Documento confere com o usuário\n")
             plt.imshow(cv2.cvtColor(imgDocumento,cv2.COLOR_BGR2RGB))
@@ -98,7 +99,7 @@ def  document_check(foto_documento, foto_usuario):
             plt.show()
             plt.imshow(cv2.cvtColor(imgTest,cv2.COLOR_BGR2RGB))
             plt.show()
-            `
+            
 
 <img width="422" alt="image" src="https://github.com/luizhdramos/Fiap_Computer_Vision/assets/96795757/0247bd36-6f70-4963-89ec-1fcd333b34d0">
 
@@ -143,7 +144,7 @@ Foi realizado o treinamento de um modelo utilizando como base os pesos do modelo
             plt.imshow(img)
             plt.show()
 
-`
+
 
 <img width="405" alt="image" src="https://github.com/luizhdramos/Fiap_Computer_Vision/assets/96795757/43f95d05-d9db-40ba-9162-5e03197e9820">
 
